@@ -1,0 +1,41 @@
+name: 📊 Generar reporte con Quarto
+
+on:
+  workflow_run:
+    workflows: ["🔄 Actualizar base de datos desde QFieldCloud ☁︎"]
+    types:
+      - completed
+
+jobs:
+  render-report:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar repositorio 📥
+        uses: actions/checkout@v3
+
+      - name: Instalar R y dependencias 🧪
+        uses: r-lib/actions/setup-r@v2
+
+      - name: Instalar Quarto 📦
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Instalar paquetes R necesarios 📚
+        run: |
+          Rscript -e 'install.packages(c("sf", "janitor", "devtools"))'
+          Rscript -e 'remotes::install_github("walkerke/mapgl")'
+
+      - name: Renderizar reporte con Quarto 📄
+        run: |
+          quarto render reporte.qmd --output-dir docs
+
+      - name: Commit del reporte generado 📝
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add docs/
+
+          # Hacer commit forzado con fecha
+          TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
+          git commit -m "📊 Render Quarto report - $TIMESTAMP" || echo "Sin cambios, pero commit forzado"
+          git push origin main

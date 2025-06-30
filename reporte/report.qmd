@@ -1,0 +1,32 @@
+---
+title: "Georeferencing report"
+author: "Antony Barja"
+date: now
+format: 
+  html:
+    page-layout: full
+    code-fold: false
+output-file: index
+---
+
+```{r}
+#| echo: false
+#| warning: false
+library(sf)
+library(mapgl)
+library(janitor)
+data <- read.csv("../output/georreferenciacion-update.csv")
+```
+
+## Summary statistic
+Hay un total de `r nrow(data)` datos actualizados al `r Sys.Date()`
+
+## Visualization 
+```{r}
+#| echo: false
+#| warning: false
+#| fig-width: 100
+data |> 
+  st_as_sf(coords = c('lon', 'lat'), crs = 4326) |>
+  maplibre_view()  
+```
