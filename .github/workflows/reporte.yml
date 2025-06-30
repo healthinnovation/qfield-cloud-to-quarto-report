@@ -28,9 +28,12 @@ jobs:
           Rscript -e 'install.packages(c("sf", "janitor", "pak","dplyr","DT"))'
           Rscript -e 'pak::pkg_install("walkerke/mapgl")'
 
+      - name: Mostrar archivos
+        run: ls -R
+   
       - name: Renderizar reporte con Quarto 📄
         run: |
-          quarto render reporte/reporte.qmd
+          quarto render reporte/reporte.qmd --output-dir docs
 
       - name: Commit del reporte generado 📝
         run: |
