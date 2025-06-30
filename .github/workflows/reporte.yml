@@ -30,7 +30,7 @@ jobs:
 
       - name: Renderizar reporte con Quarto 📄
         run: |
-          quarto render reporte.qmd --output-dir docs
+            quarto render reporte/reporte.qmd --output-dir docs
 
       - name: Commit del reporte generado 📝
         run: |
