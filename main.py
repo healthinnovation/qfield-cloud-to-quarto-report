@@ -8,13 +8,9 @@ import hashlib
 import sqlite3
 
 # Configuración
-#username = os.environ["QFIELD_USER"]
-username = "geografope"
-#password = os.environ["QFIELD_PASS"]
-password = "jamesgay"
-
-#project_id = os.environ["QFIELD_PROJECT_ID"]
-project_id = "95d05e0d-9e9c-4eaf-ac65-4ed5e33af46e"
+username = os.environ["QFIELD_USER"]
+password = os.environ["QFIELD_PASS"]
+project_id = os.environ["QFIELD_PROJECT_ID"]
 
 fecha_actual = datetime.date.today()
 fecha_actual_str = fecha_actual.strftime("%Y-%m-%d")

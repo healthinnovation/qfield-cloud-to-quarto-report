@@ -22,7 +22,7 @@ jobs:
 
       - name: Instalar paquetes R necesarios 📚
         run: |
-          Rscript -e 'install.packages(c("sf", "janitor", "devtools"))'
+          Rscript -e 'install.packages(c("sf", "janitor", "devtools","dplyr","DT"))'
           Rscript -e 'remotes::install_github("walkerke/mapgl")'
 
       - name: Renderizar reporte con Quarto 📄

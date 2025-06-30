@@ -6,7 +6,7 @@ format:
   html:
     page-layout: full
     code-fold: false
-output-file: index
+output-dir: ../docs
 ---
 
 ```{r}
@@ -15,11 +15,22 @@ output-file: index
 library(sf)
 library(mapgl)
 library(janitor)
+library(DT)
+library(dplyr)
 data <- read.csv("../output/georreferenciacion-update.csv")
 ```
 
 ## Summary statistic
 Hay un total de `r nrow(data)` datos actualizados al `r Sys.Date()`
+
+```{r}
+#| echo: false
+data |> 
+  group_by(comunidad) |> 
+  summarise(total = n()) |> 
+  DT::datatable()
+```
+
 
 ## Visualization 
 ```{r}
