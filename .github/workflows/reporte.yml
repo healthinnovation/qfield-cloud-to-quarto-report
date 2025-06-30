@@ -6,6 +6,9 @@ on:
     types:
       - completed
 
+permissions:
+  contents: write 
+
 jobs:
   render-report:
     runs-on: ubuntu-latest
